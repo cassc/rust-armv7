@@ -4,12 +4,11 @@ RUN  apt-get update
 RUN  apt-get install -y apt-transport-https
 COPY bionic.sources.list /etc/apt/sources.list
 RUN  apt-get update
-RUN  apt-get install -y libudev1 libudev-dev software-properties-common supercollider
+RUN  apt-get install -y libudev1 libudev-dev software-properties-common
 RUN  apt-get install -y curl
 RUN  echo 'export RUSTUP_DIST_SERVER=https://mirrors.tuna.tsinghua.edu.cn/rustup' >> /etc/profile
 COPY .cargo/ /root/.cargo/
 RUN  curl https://sh.rustup.rs -sSf | sh -s -- -y
-# RUN  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 ENV  PATH="/root/.cargo/bin:${PATH}"
 RUN  rustup install nightly
 RUN  rustup default nightly
